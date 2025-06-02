@@ -35,3 +35,7 @@ npm install  @emotion/styled
 #install tailwind
 npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
+
+#install react router dom
+npm install react-router-dom
+
