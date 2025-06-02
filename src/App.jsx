@@ -1,9 +1,18 @@
 import React from 'react'
-
+import {Browser as Router,Routes,Route} from "react-router-dom";
+import Store from './pages/Store';
+import { fromJSON } from 'postcss'
+import Cart from './pages/Cart';
 function App() {
   return (
     <div>
-      <h1>e-bar store</h1>
+     <Router>
+      <Routes>
+        <Route path="/" element={<Store/>}/>
+        <Route path="/cart" element={<Cart/>}/>
+
+      </Routes>
+     </Router>
       
     </div>
   )
