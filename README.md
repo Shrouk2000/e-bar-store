@@ -39,3 +39,10 @@ npx tailwindcss init -p
 #install react router dom
 npm install react-router-dom
 
+#tech stack
+# framework==>react.js
+#styling==> tailwind
+# UI Components==> MUI
+#state managment==>redux toolkit
+#Language==>JS
+#http requests==> axios
