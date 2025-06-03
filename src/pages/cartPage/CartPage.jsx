@@ -19,12 +19,14 @@ function Cart() {
       console.error("Failed to load cart items:", error);
       setItems([]);
     }
+   
   };
 
   // Load cart summary (subtotal, total)
   const loadCartSummary = async () => {
     try {
       const res = await api.get(`/cart/prices?token=${token}`);
+      console.log("Cart summary response:", res.data);
       setSummary({
         subtotal: res.data.subtotal ?? 0,
         total: res.data.total ?? 0,
@@ -64,6 +66,30 @@ function Cart() {
   useEffect(() => {
     loadCart();
   }, []);
+
+  //calc subtotal & total
+  useEffect(() => {
+    if (
+      items.length > 0 &&
+      (typeof summary.subtotal !== "number" || summary.subtotal === 0) &&
+      (typeof summary.total !== "number" || summary.total === 0)
+    ) {
+      const subtotal = items.reduce(
+        (sum, item) => sum + (item.gold_price ?? 0) * (item.quantity ?? 1),
+        0
+      );
+      const total = items.reduce(
+        (sum, item) => sum + (item.total ?? 0),
+        0
+      );
+      setSummary({
+   
+        subtotal,
+        total: total || subtotal,
+      });
+           console.log("Cart summary loaded:", summary);
+    }
+  }, [items, summary]);
 
   if (loading) return <Spinner />;
 
@@ -118,9 +144,12 @@ function Cart() {
           </div>
 
           <div className="cart-summary">
-            <Typography variant="h6">Subtotal: {summary.subtotal.toLocaleString()} EGP</Typography>
-            <Typography variant="h6">Total: {summary.total.toLocaleString()} EGP</Typography>
-
+            <Typography variant="h6">
+              Subtotal: {typeof summary.subtotal === "number" ? summary.subtotal.toLocaleString() : "N/A"} EGP
+            </Typography>
+            <Typography variant="h6">
+              Total: {typeof summary.total === "number" ? summary.total.toLocaleString() : "N/A"} EGP
+            </Typography>
             <Button onClick={handleClearCart} variant="contained" color="error" className="clear-cart-btn">
               Clear Cart
             </Button>
