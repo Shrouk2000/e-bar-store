@@ -1,0 +1,17 @@
+[33md631d7a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m HEAD@{0}: rebase (abort): returning to refs/heads/main
+[33me8972ee[m HEAD@{1}: commit: cart items updated
+[33m9acf63a[m HEAD@{2}: commit: error solved in stor page
+[33md631d7a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m HEAD@{3}: reset: moving to d631d7a
+[33m56b9793[m HEAD@{4}: pull --rebase origin main (start): checkout 56b9793672e8769c5371470d3ff01acebe35bc93
+[33md631d7a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m HEAD@{5}: rebase (finish): returning to refs/heads/main
+[33md631d7a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m HEAD@{6}: commit: spinner added
+[33mfaf01c8[m HEAD@{7}: commit: redux store added
+[33ma0e239b[m HEAD@{8}: commit: cart page added
+[33m6edb404[m HEAD@{9}: commit: store page updated
+[33mc78ef21[m HEAD@{10}: commit: store page added
+[33md72d1fa[m HEAD@{11}: commit: structure file added
+[33mfa2881a[m HEAD@{12}: commit: all packages installed
+[33mf96df4d[m HEAD@{13}: commit: update readme file
+[33m9e4d43b[m HEAD@{14}: pull origin main --rebase (start): checkout 9e4d43b72ac5fde9506f2e691d7faa3fb66163bb
+[33m56b9793[m HEAD@{15}: Branch: renamed refs/heads/master to refs/heads/main
+[33m56b9793[m HEAD@{17}: commit (initial): start project
