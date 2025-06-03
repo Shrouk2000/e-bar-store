@@ -8,19 +8,32 @@ function Cart() {
   const [summary, setSummary] = useState({ subtotal: 0, total: 0 });
   const [loading, setLoading] = useState(true);
 
-  const loadCart = async () => {
-    setLoading(true);
-    try {
-      const res = await api.get(`/cart/index?token=${token}`);
-      setItems(res.data);
+ const loadCart = async () => {
+  setLoading(true);
+  try {
+    const res = await api.get(`/cart/index?token=${token}`);
+    console.log("Cart API response:", res.data);
+    let itemsArr = [];
+    if (res.data && res.data.Cart && Array.isArray(res.data.Cart.items)) {
+      itemsArr = res.data.Cart.items;
+    }
+    setItems(itemsArr);
+
+    // If you want to use prices from Cart.prices:
+    if (res.data && res.data.Cart && res.data.Cart.prices) {
+      setSummary(res.data.Cart.prices);
+    } else {
+      // fallback to old API if needed
       const prices = await api.get(`/cart/prices?token=${token}`);
       setSummary(prices.data);
-    } catch (error) {
-      console.error("Failed to load cart:", error);
-    } finally {
-      setLoading(false);
     }
-  };
+  } catch (error) {
+    console.error("Failed to load cart:", error);
+    setItems([]);
+  } finally {
+    setLoading(false);
+  }
+};
 
   useEffect(() => {
     loadCart();
@@ -36,15 +49,18 @@ function Cart() {
     loadCart();
   };
 
-  if (loading) return <Spinner />;  // use spinner component
+  if (loading) return <Spinner />;
+
+  // Always use an array for rendering
+  const itemList = Array.isArray(items) ? items : [];
 
   return (
     <div className="p-4">
       <Typography variant="h5">Shopping Cart</Typography>
-      {items.length === 0 ? (
+      {itemList.length === 0 ? (
         <Typography className="mt-4">Your cart is empty.</Typography>
       ) : (
-        items.map((item) => (
+        itemList.map((item) => (
           <div key={item.id} className="border-b py-4 flex justify-between items-center">
             <div>
               <Typography>{item.name}</Typography>
@@ -60,7 +76,7 @@ function Cart() {
           </div>
         ))
       )}
-      {items.length > 0 && (
+      {itemList.length > 0 && (
         <>
           <div className="mt-4">
             <Typography variant="h6">Subtotal: ${summary.subtotal}</Typography>
